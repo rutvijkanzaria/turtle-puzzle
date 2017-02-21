@@ -1,0 +1,101 @@
+html,body,#root{
+	min-height: 100%;
+}
+
+body {
+  background: #d5d5d5; 
+  font-family: arial;
+  color: #FAFAFA;
+  text-transform: uppercase;
+}
+
+.container {
+  background: #333;
+  margin: 35px auto;
+  box-shadow: 0 4px 0px #333;
+  border-radius: 15px;
+  min-height: 100%;
+}
+
+.movement{
+	margin: 40px 10px 10px;
+	padding: 10px;
+  background: #222;
+  border-radius: 15px;
+}
+
+.right, .left{
+	background-color: #4b71b5;
+	text-align: center;
+	border: 1px solid #eee;
+}
+
+.fail{
+	background: #c44442;
+	text-align: center;
+	border: 1px solid #eee;
+}
+
+.forward{
+	background-color: #66BB6A;
+	text-align: center;
+	border: 1px solid #eee;
+}
+
+.grid-box{
+	margin: 0 20px;
+	text-align: center;
+	flex-direction: column;
+	min-height: 500px;
+	min-width: 500px;
+}
+
+.grid-box .grid-row:nth-child(odd) .grid-column:nth-child(even){
+	background: #666;
+}
+
+.grid-box .grid-row:nth-child(odd) .grid-column:nth-child(odd){
+	background: #222;
+}
+
+.grid-box .grid-row:nth-child(even) .grid-column:nth-child(odd){
+	background: #666;
+}
+
+.grid-box .grid-row:nth-child(even) .grid-column:nth-child(even){
+	background: #222;
+}
+
+.grid-box .grid-column{
+	border: 1px solid #eee;
+	padding: 5px;
+	min-height: 62px;
+}
+
+.turtle-img{
+	display: block;
+	max-width: 50px;
+	margin: auto;
+}
+
+.obstacle {
+	display: block;
+	max-width: 50px;
+	margin: auto;	
+}
+
+.north{
+	transform: rotate(0deg);
+}
+
+.east{
+	transform: rotate(90deg);
+}
+
+.south{
+	transform: rotate(180deg);
+}
+
+.west{
+	transform: rotate(270deg);
+}
