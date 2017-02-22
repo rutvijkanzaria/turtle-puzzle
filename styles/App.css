@@ -23,6 +23,11 @@ body {
   border-radius: 15px;
 }
 
+input[type="text"], input[type="number"] {
+  text-transform: uppercase;
+  /*font-weight: bold;    */
+}
+
 .right, .left{
 	background-color: #4b71b5;
 	text-align: center;
@@ -97,4 +102,8 @@ body {
 
 .west{
 	transform: rotate(270deg);
+}
+
+.error{
+	color: #c44442 !important;
 }
