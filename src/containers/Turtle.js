@@ -11,125 +11,13 @@ import MovementForm from '../components/MovementForm';
 import Movements from '../components/Movements';
 import Gridbox from '../components/Gridbox';
 
-const INITIAL_STATE = [
-  [
-    {
-      "turtle" : ["true", "north"],
-      "obstacle": false
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": true
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    }
-  ],
-  [
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": true
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    }
-  ],
-  [
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": true
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    }
-  ],
-  [
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": true
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    }
-  ],
-  [
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": true
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    },
-    {
-      "turtle" : ["false", "north"],
-      "obstacle": false
-    }
-  ]
-];
-
 class Turtle extends Component {
   constructor(props){
     super(props);
     this.state = {
       gridSize: 5,
-      gridArray: []
+      gridArray: [],
+      currentPosition: [0, 0]
     }
   }
 
@@ -143,7 +31,7 @@ class Turtle extends Component {
   }
 
   constructGrid = (size) => {
-    let grid = [];
+    const grid = [];
     for(let i = 0; i < size; i++){
       let row = [];
       for(let j = 0; j < size; j++){

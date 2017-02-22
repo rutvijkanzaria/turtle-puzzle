@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 
 class GridForm extends Component {
+  
   handleSubmit = e =>{
     e.preventDefault();
     this.props.createGrid(this.size.value);
