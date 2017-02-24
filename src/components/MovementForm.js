@@ -8,14 +8,13 @@ class MovementForm extends Component {
   
     this.state = {
       formInput: '',
-      movements: [],
       showError: false
     };
   }
 
   handleChange = e => {
     let str = e.target.value;
-    let movements = this.state.movements.slice();
+    // let movements = this.state.movements.slice();
     switch(str[str.length -1]){
       case 'F':
       case 'f':
@@ -23,17 +22,14 @@ class MovementForm extends Component {
       case 'r':
       case 'L':
       case 'l':
-        movements.push(str[str.length - 1].toLowerCase());
         this.setState({
           formInput: str,
-          movements: movements,
           showError: false
         });
         break;
 
       case undefined: this.setState({
           formInput: '',
-          movements: [],
           showError: false
         });
         break;
@@ -44,10 +40,10 @@ class MovementForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.setMovements(this.state.movements);
+    console.log(this.state.formInput.split(""));
+    this.props.setMovements(this.state.formInput.toLowerCase().split(""));
     this.setState({
       formInput: '',
-      movements: [],
       showError: false,
     });
     // console.log(this.movements.value);
@@ -57,7 +53,6 @@ class MovementForm extends Component {
 		return(
 			<form className="mt-5" onSubmit={this.handleSubmit}>
         <div className="form-group">
-          <label htmlFor="movementinput">movement instructions</label>
           <div className="input-group">
             <input 
               value={this.state.formInput}
@@ -65,12 +60,13 @@ class MovementForm extends Component {
               type="text" 
               id="movementinput" 
               className="form-control" 
-              placeholder="Enter movements..." 
+              placeholder="Example - FRL" 
             />
             <span className="input-group-btn">
               <button type="submit" className="btn btn-primary">MOVE TURTLE</button>
             </span>
           </div>
+          <small className="form-text text-muted">Instructions: F- Move Forward, R- Turn right, L- Turn left</small>
           {
             (this.state.showError) 
             ?
