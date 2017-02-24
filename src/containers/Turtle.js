@@ -28,7 +28,6 @@ class Turtle extends Component {
   }
   
   createGrid = value => {
-    this.setState({gridSize: value});
     this.constructGrid(value);
   }
 
@@ -62,7 +61,10 @@ class Turtle extends Component {
         obst++;
       }
     }
-    this.setState({gridArray: grid});
+    this.setState({
+      gridArray: grid,
+      gridSize: size
+    });
   }
 
   setMovements = movements => {
