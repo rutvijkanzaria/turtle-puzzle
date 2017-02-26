@@ -63,7 +63,10 @@ class Turtle extends Component {
     }
     this.setState({
       gridArray: grid,
-      gridSize: size
+      gridSize: size,
+      XPosition: 0,
+      YPosition: 0,
+      movements: []
     });
   }
 
@@ -74,6 +77,10 @@ class Turtle extends Component {
         case 'r': 
         case 'l': 
           localState.grid = this.turnTurtle(move, localState);
+          localState.movements.push({
+            action: move,
+            isExecuted: true
+          });
           break;
 
         default: 
@@ -131,6 +138,7 @@ class Turtle extends Component {
     let grid = localState.gridArray;
     let row = localState.XPosition;
     let col = localState.YPosition;
+    let movements = localState.movements;
     let direction = grid[row][col].turtle[1];
     switch(direction){
       case 'north':
@@ -138,12 +146,22 @@ class Turtle extends Component {
           grid[row][col].turtle = "false";
           row++;
           grid[row][col].turtle = ["true", "north"];
+          movements.push({
+            action: 'f',
+            isExecuted: true
+          });
+        } else {
+          movements.push({
+            action: 'f',
+            isExecuted: false
+          });
         }
 
         return({
           gridArray: grid,
           XPosition: row,
-          YPosition: col
+          YPosition: col,
+          movements
         });
 
         break;
@@ -153,12 +171,22 @@ class Turtle extends Component {
           grid[row][col].turtle[0] = "false";
           col++;
           grid[row][col].turtle = ["true", "east"];
+          movements.push({
+            action: 'f',
+            isExecuted: true
+          });
+        } else {
+          movements.push({
+            action: 'f',
+            isExecuted: false
+          });
         }
 
         return({
           gridArray: grid,
           XPosition: row,
-          YPosition: col
+          YPosition: col,
+          movements
         });
         break;
 
@@ -167,12 +195,22 @@ class Turtle extends Component {
           grid[row][col].turtle[0] = "false";
           row--;
           grid[row][col].turtle = ["true", "south"];
+          movements.push({
+            action: 'f',
+            isExecuted: true
+          });
+        } else {
+          movements.push({
+            action: 'f',
+            isExecuted: false
+          });
         }
 
         return({
           gridArray: grid,
           XPosition: row,
-          YPosition: col
+          YPosition: col,
+          movements
         });
         break;
 
@@ -181,12 +219,22 @@ class Turtle extends Component {
           grid[row][col].turtle[0] = "false";
           col--;
           grid[row][col].turtle = ["true", "west"];
+          movements.push({
+            action: 'f',
+            isExecuted: true
+          });
+        } else {
+          movements.push({
+            action: 'f',
+            isExecuted: false
+          });
         }
 
         return({
           gridArray: grid,
           XPosition: row,
-          YPosition: col
+          YPosition: col,
+          movements
         });
 
     }
@@ -199,10 +247,28 @@ class Turtle extends Component {
           <div className="col-md-5">
             <GridForm createGrid={this.createGrid} />
             <MovementForm setMovements={this.setMovements} />
-            <Movements />
+            {
+              (this.state.movements.length > 0) 
+              ? 
+                <Movements movements={this.state.movements}/>
+              : 
+                <p></p>}
           </div>
           <div className="col-md-7">
             <Gridbox grid={this.state.gridArray} />
+            <img src="./images/compass.svg" className="obstacle mb-3" alt="Turtle"/>
+            {
+              (this.state.movements.length > 0) 
+              ?
+                <h5 className="text-center">
+                  Final Position: 
+                   {' ' + (this.state.YPosition + 1)},
+                   {' ' + (this.state.XPosition + 1)} 
+                   {' ' + this.state.gridArray[this.state.XPosition][this.state.YPosition].turtle[1]}
+                </h5>
+              :
+              <p></p>
+            }
           </div>
         </div>
       </div>

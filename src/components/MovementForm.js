@@ -28,7 +28,8 @@ class MovementForm extends Component {
         });
         break;
 
-      case undefined: this.setState({
+      case undefined: 
+        this.setState({
           formInput: '',
           showError: false
         });

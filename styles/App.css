@@ -28,7 +28,7 @@ input[type="text"], input[type="number"] {
   /*font-weight: bold;    */
 }
 
-.right, .left{
+.turn{
 	background-color: #4b71b5;
 	text-align: center;
 	border: 1px solid #eee;
@@ -50,8 +50,7 @@ input[type="text"], input[type="number"] {
 	margin: 0 20px;
 	text-align: center;
 	flex-direction: column;
-	min-height: 500px;
-	min-width: 500px;
+	margin-bottom: 5rem;
 }
 
 .grid-box .grid-row:nth-child(odd) .grid-column:nth-child(even){
