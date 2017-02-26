@@ -40,7 +40,6 @@ class MovementForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.formInput.split(""));
     this.props.setMovements(this.state.formInput.toLowerCase().split(""));
     this.setState({
       formInput: '',

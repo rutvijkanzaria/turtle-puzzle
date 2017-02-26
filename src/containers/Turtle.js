@@ -68,27 +68,26 @@ class Turtle extends Component {
   }
 
   setMovements = movements => {
-    console.log('movements', movements);
+    const localState = this.state;
     movements.forEach((move, index) => {
       switch(move){
         case 'r': 
         case 'l': 
-          setTimeout(() => {
-          this.turnTurtle(move);
-        }, 0);
+          localState.grid = this.turnTurtle(move, localState);
           break;
 
         default: 
-          setTimeout(() => {
-            this.moveTurtle();
-          }, 0);
-
+          let someVar =  this.moveTurtle(localState);
+          localState.XPosition = someVar.XPosition;
+          localState.YPosition = someVar.YPosition;
+          localState.gridArray = someVar.gridArray;
       }
     });
+    this.setState(localState);
   }
 
-  turnTurtle = move => {
-    let grid = this.state.gridArray;
+  turnTurtle = (move, localState) => {
+    let grid = localState.gridArray;
     let direction = grid[this.state.XPosition][this.state.YPosition].turtle[1];
     switch(direction){
       case 'north': 
@@ -97,9 +96,7 @@ class Turtle extends Component {
           grid[this.state.XPosition][this.state.YPosition].turtle[1] = 'east'
         :
           grid[this.state.XPosition][this.state.YPosition].turtle[1] = 'west';
-        this.setState({
-          gridArray: grid
-        })
+        
 
         break;
 
@@ -109,9 +106,6 @@ class Turtle extends Component {
           grid[this.state.XPosition][this.state.YPosition].turtle[1] = 'south'
         :
           grid[this.state.XPosition][this.state.YPosition].turtle[1] = 'north';
-        this.setState({
-          gridArray: grid
-        })
         break;
 
       case 'south':
@@ -120,9 +114,6 @@ class Turtle extends Component {
           grid[this.state.XPosition][this.state.YPosition].turtle[1] = 'west'
         :
           grid[this.state.XPosition][this.state.YPosition].turtle[1] = 'east';
-        this.setState({
-          gridArray: grid
-        })
         break;
 
       default: 
@@ -131,27 +122,25 @@ class Turtle extends Component {
           grid[this.state.XPosition][this.state.YPosition].turtle[1] = 'north'
         :
           grid[this.state.XPosition][this.state.YPosition].turtle[1] = 'south';
-        this.setState({
-          gridArray: grid
-        })
-
     }
+
+    return grid;
   }
 
-  moveTurtle(){
-    let grid = this.state.gridArray;
-    let row = this.state.XPosition;
-    let col = this.state.YPosition;
+  moveTurtle = localState =>{
+    let grid = localState.gridArray;
+    let row = localState.XPosition;
+    let col = localState.YPosition;
     let direction = grid[row][col].turtle[1];
     switch(direction){
       case 'north':
-        if(row != (this.state.gridSize - 1) && !grid[row+1][col].obstacle){
+        if(row != (localState.gridSize - 1) && !grid[row+1][col].obstacle){
           grid[row][col].turtle = "false";
           row++;
           grid[row][col].turtle = ["true", "north"];
         }
 
-        this.setState({
+        return({
           gridArray: grid,
           XPosition: row,
           YPosition: col
@@ -160,13 +149,13 @@ class Turtle extends Component {
         break;
 
       case 'east':
-        if(col != (this.state.gridSize - 1) && !grid[row][col + 1].obstacle){
+        if(col != (localState.gridSize - 1) && !grid[row][col + 1].obstacle){
           grid[row][col].turtle[0] = "false";
           col++;
           grid[row][col].turtle = ["true", "east"];
         }
 
-        this.setState({
+        return({
           gridArray: grid,
           XPosition: row,
           YPosition: col
@@ -180,7 +169,7 @@ class Turtle extends Component {
           grid[row][col].turtle = ["true", "south"];
         }
 
-        this.setState({
+        return({
           gridArray: grid,
           XPosition: row,
           YPosition: col
@@ -194,7 +183,7 @@ class Turtle extends Component {
           grid[row][col].turtle = ["true", "west"];
         }
 
-        this.setState({
+        return({
           gridArray: grid,
           XPosition: row,
           YPosition: col
